@@ -1,10 +1,19 @@
 pipeline {
     agent any
+
     tools {
-        jdk 'JAVA_HOME' // This name must match the name in Global Tool Configuration
-        maven 'M2_HOME' 
+        // Vérifiez bien que ces noms sont IDENTIQUES à ceux dans 
+        // "Administrer Jenkins" -> "Global Tool Configuration"
+        jdk 'JAVA_HOME' 
+        maven 'M2_HOME'
     }
+
     stages {
-        // ... your stages
+        stage('Compile and Test') {
+            steps {
+                // On utilise 'sh' pour Linux. Si Jenkins est sur Windows, utilisez 'bat'
+                sh 'mvn clean install -DskipTests'
+            }
+        }
     }
 }
