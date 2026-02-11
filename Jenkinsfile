@@ -1,15 +1,10 @@
 pipeline {
     agent any
- 
     tools {
-        maven 'M2_HOME'
+        jdk 'jdk17' // This name must match the name in Global Tool Configuration
+        maven 'maven3' 
     }
- 
     stages {
-        stage('Compile & Test') {
-            steps {
-                sh 'mvn clean install -DskipTests'
-            }
-        }
+        // ... your stages
     }
 }
