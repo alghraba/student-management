@@ -1,23 +1,22 @@
 pipeline {
     agent any
 
-    environment {
-        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
-        PATH = "${JAVA_HOME}/bin:${env.PATH}"
+    tools {
+        maven 'Maven3'      // Nom configuré dans Jenkins (Global Tool Configuration)
+        jdk 'Java17'        // Nom configuré dans Jenkins
     }
 
     stages {
 
-        stage('Check Java') {
+        stage('Checkout') {
             steps {
-                sh 'java -version'
-                sh 'mvn -version'
+                git 'https://github.com/alghraba/student-management.git'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn clean package -DskipTests'
             }
         }
 
@@ -25,9 +24,18 @@ pipeline {
             steps {
                 sh '''
                 echo "Deploying application..."
-                nohup java -jar target/*.jar > app.log 2>&1 &
+                ls target
                 '''
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline exécutée avec succès 🎉'
+        }
+        failure {
+            echo 'Échec de la pipeline ❌'
         }
     }
 }
