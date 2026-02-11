@@ -1,18 +1,15 @@
 pipeline {
-  agent any
-
-  stages {
-    stage(‘Checkout’) {
-      steps {
-        checkout scm
-      }
+    agent any
+ 
+    tools {
+        maven 'M2_HOME'
     }
-
-    stage(‘Compile’) {
-      steps {
-        sh ‘chmod +x mvnw || true’
-        sh ‘./mvnw clean compile || mvn clean compile’
-      }
+ 
+    stages {
+        stage('Compile & Test') {
+            steps {
+                sh 'mvn clean install -DskipTests'
+            }
+        }
     }
-  }
 }
