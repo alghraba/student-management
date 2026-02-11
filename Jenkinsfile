@@ -5,7 +5,8 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/alghraba/student-management.git'
+                git branch: 'main', 
+                    url: 'https://github.com/alghraba/student-management.git'
             }
         }
 
