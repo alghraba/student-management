@@ -1,37 +1,15 @@
 pipeline {
     agent any
-
-    stages {
-
-        stage('Checkout') {
-            steps {
-                git branch: 'main', 
-                    url: 'https://github.com/alghraba/student-management.git'
-            }
-        }
-
-        stage('Build') {
-            steps {
-                sh 'mvn clean package -DskipTests'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                sh '''
-                echo "Deploying application..."
-                ls target
-                '''
-            }
-        }
+ 
+    tools {
+        maven 'M2_HOME'
     }
-
-    post {
-        success {
-            echo 'Pipeline exécutée avec succès'
-        }
-        failure {
-            echo 'Échec de la pipeline'
+ 
+    stages {
+        stage('Compile & Test') {
+            steps {
+                sh 'mvn clean install -DskipTests'
+            }
         }
     }
 }
