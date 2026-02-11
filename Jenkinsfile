@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven3'      // Nom configuré dans Jenkins (Global Tool Configuration)
-        jdk 'Java17'        // Nom configuré dans Jenkins
-    }
-
     stages {
 
         stage('Checkout') {
@@ -32,10 +27,10 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline exécutée avec succès 🎉'
+            echo 'Pipeline exécutée avec succès'
         }
         failure {
-            echo 'Échec de la pipeline ❌'
+            echo 'Échec de la pipeline'
         }
     }
 }
