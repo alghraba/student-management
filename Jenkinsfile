@@ -4,7 +4,7 @@ pipeline {
     tools {
         // Vérifiez bien que ces noms sont IDENTIQUES à ceux dans 
         // "Administrer Jenkins" -> "Global Tool Configuration"
-        jdk 'JAVA_HOME' 
+        jdk 'jdk17' 
         maven 'maven3'
     }
 
