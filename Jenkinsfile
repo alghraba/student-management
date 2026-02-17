@@ -5,7 +5,7 @@ pipeline {
         // Vérifiez bien que ces noms sont IDENTIQUES à ceux dans 
         // "Administrer Jenkins" -> "Global Tool Configuration"
         jdk 'JAVA_HOME' 
-        maven 'M2_HOME'
+        maven 'maven3'
     }
 
     stages {
