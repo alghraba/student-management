@@ -29,12 +29,12 @@ pipeline {
     }
 }
 
-        stage('Build Docker Image') {
-            steps {
+       // stage('Build Docker Image') {
+       //     steps {
                 // Cette étape risque toujours d'échouer tant que 
                 // le socket docker n'est pas partagé avec Jenkins
-                sh 'docker build -t student-management-app:latest .'
-            }
-        }
+    //            sh 'docker build -t student-management-app:latest .'
+            //}
+       // }
     }
 }
