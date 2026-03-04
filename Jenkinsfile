@@ -27,6 +27,18 @@ pipeline {
             -Dsonar.login=${SONAR_AUTH_TOKEN}
         '''
     }
+           stage('Deploy to Kubernetes') {
+    steps {
+        script {
+            // 'kubeconfig-id' est l'ID que tu as donné lors de l'upload
+            withCredentials([file(credentialsId: 'kubeconfig-id', variable: 'KUBECONFIG')]) {
+                sh "kubectl --kubeconfig=${KUBECONFIG} apply -f app-config.yaml"
+                sh "kubectl --kubeconfig=${KUBECONFIG} apply -f spring-deployment.yaml"
+                sh "kubectl --kubeconfig=${KUBECONFIG} apply -f spring-service.yaml"
+            }
+        }
+    }
+}
 }
 
        // stage('Build Docker Image') {
